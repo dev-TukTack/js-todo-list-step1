@@ -1,13 +1,26 @@
-const setTodos = (keyValue) => {
-	window.localStorage["todos"] = JSON.stringify(keyValue);
-};
+export const getTodos = () => {
+	if (window.localStorage["todos"] === undefined) return [];
 
-const getTodos = () => {
 	let keyData = JSON.parse(window.localStorage["todos"]);
+
 	if (keyData === null || keyData === undefined) keyData = "";
+
+	console.log("keyData ", keyData)
+
 	return keyData;
 };
 
-const clearTodos = () => {
+export const setTodos = (keyValue) => {
+	console.log("0 ", getTodos());
+
+	let oriTodoArr = getTodos();
+	let todoArr = oriTodoArr.push(keyValue);
+
+	console.log("1 ", JSON.stringify(todoArr))
+
+	window.localStorage["todos"] = JSON.stringify(todoArr);
+};
+
+export const clearTodos = () => {
 	localStorage.removeItem("todos");
 };
